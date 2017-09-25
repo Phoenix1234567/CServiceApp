@@ -1,3 +1,45 @@
 <resources>
     <string name="app_name">CServices</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="txt_home">Home</string>
+    <string name="txt_book_service">Book Service</string>
+    <string name="txt_my_service">My Service</string>
+    <string name="txt_add_service">Add Service</string>
+    <string name="txt_offer">Offer/Promotion</string>
+    <string name="txt_grievance">Grievance</string>
+    <string name="txt_about_us">About Us</string>
+    <string name="txt_contact_us">Contact Us</string>
+    <string name="txt_logout">Logout</string>
+
+    <array name="drawer_title">
+        <item name="drawer_header"></item>
+        <item name="drawer_home">@string/txt_home</item>
+        <item name="drawer_my_services">@string/txt_my_service</item>
+        <item name="drawer_book_service">@string/txt_book_service</item>
+        <item name="drawer_add_service">@string/txt_add_service</item>
+        <item name="drawer_offer">@string/txt_offer</item>
+        <item name="drawer_grievance">@string/txt_grievance</item>
+        <item name="drawer_about_us">@string/txt_about_us</item>
+        <item name="drawer_contact_us">@string/txt_contact_us</item>
+        <item name="drawer_ogout">@string/txt_logout</item>
+    </array>
+
+    <array name="drawer_images">
+        <item name="drawer_img_header"></item>
+        <item name="drawer_img_home">@drawable/ic_menu_camera</item>
+        <item name="drawer_img_my_service">@drawable/ic_menu_gallery</item>
+        <item name="drawer_img_book_service">@drawable/ic_menu_slideshow</item>
+        <item name="drawer_img_add_service">@drawable/ic_menu_manage</item>
+        <item name="drawer_img_offer">@drawable/ic_menu_share</item>
+        <item name="drawer_img_grievance">@drawable/ic_menu_send</item>
+        <item name="drawer_img_aboutus">@drawable/ic_menu_send</item>
+        <item name="drawer_img_contactus">@drawable/ic_menu_send</item>
+        <item name="drawer_img_logout">@drawable/ic_menu_send</item>
+    </array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

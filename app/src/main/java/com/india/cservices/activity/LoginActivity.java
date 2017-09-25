@@ -3,6 +3,7 @@ package com.india.cservices.activity;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.india.cservices.R;
 
@@ -17,5 +18,10 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.login_activity);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
     }
 }
