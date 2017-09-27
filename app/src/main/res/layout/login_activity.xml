@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/user"
         android:drawablePadding="10dp"
-        android:hint="UserName"
+        android:hint="Email or Mobile"
 
          />
     </android.support.design.widget.TextInputLayout>
@@ -87,7 +87,7 @@
             android:textColor="@color/colorWhite"
             android:layout_marginRight="5dp"
             android:layout_alignParentRight="true"
-            android:text="Forgate password"/>
+            android:text="Forgot password?"/>
 
         <Button
             android:id="@+id/btn_login"
@@ -123,13 +123,13 @@
         android:gravity="center_horizontal"
         android:textColor="@color/colorWhite"
 
-        android:text="dont have any account? "/>
+        android:text="don't have any account? "/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/holo_red_dark"
-        android:text=" singhUp"/>
+        android:text=" Sign Up"/>
 </LinearLayout>
     <TextView
         android:id="@+id/txt_skip"

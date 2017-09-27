@@ -36,27 +36,35 @@ public class LoginActivity extends BaseActivity implements INetworkResponse {
     public void onClick(View v) {
         super.onClick(v);
 
+        switch (v.getId()) {
+            case R.id.btn_login:
 
+                VolleyHelper.jsonNetworkRequest("http://172.18.120.127:8112/user/login",true,createParamsForLogin(),this);
+            break;
+            default:
 
-        JSONObject obj = new JSONObject();
-        try {
-            if(emailOrPhone.getText().toString().matches("[0-9]+"))
-                obj.put("mobileNo",emailOrPhone.getText().toString());
-            else
-                obj.put("emailId",emailOrPhone.getText().toString());
-
-            obj.put("password",password.getText().toString());
-
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
 
-        VolleyHelper.jsonNetworkRequest("http://172.18.120.127:8112/user/login",true,obj,this);
 
-//        Intent loginIntent = new Intent(LoginActivity.this, DashboardActivity.class);
-//        startActivity(loginIntent);
-//        finish();
     }
+
+     JSONObject createParamsForLogin()
+     {
+         JSONObject obj = new JSONObject();
+         try {
+             if(emailOrPhone.getText().toString().matches("[0-9]+"))
+                 obj.put("mobileNo",emailOrPhone.getText().toString());
+             else
+                 obj.put("emailId",emailOrPhone.getText().toString());
+
+             obj.put("password",password.getText().toString());
+             return obj;
+
+         } catch (JSONException e) {
+             e.printStackTrace();
+         }
+         return null;
+     }
 
     @Override
     public void trackEvent() {
@@ -70,11 +78,13 @@ public class LoginActivity extends BaseActivity implements INetworkResponse {
     public void onJsonResponse(JSONObject obj) {
 
         Toast.makeText(this,"Successfull login",Toast.LENGTH_LONG).show();
-
+        Intent loginIntent = new Intent(LoginActivity.this, DashboardActivity.class);
+        startActivity(loginIntent);
+        finish();
     }
 
     @Override
     public void onError(String error) {
-
+        Toast.makeText(this,"Please enter valid username and password",Toast.LENGTH_LONG).show();
     }
 }
