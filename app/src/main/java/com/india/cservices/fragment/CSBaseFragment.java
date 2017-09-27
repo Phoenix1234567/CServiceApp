@@ -8,4 +8,12 @@ import android.app.Fragment;
  */
 
 public abstract class CSBaseFragment extends Fragment {
+
+
+    public  void setFragment()
+    {
+
+
+    }
+
 }

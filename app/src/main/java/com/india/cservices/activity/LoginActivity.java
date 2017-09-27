@@ -1,8 +1,7 @@
 package com.india.cservices.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.india.cservices.R;
@@ -17,19 +16,30 @@ import org.json.JSONObject;
 public class LoginActivity extends BaseActivity implements INetworkResponse {
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-
+        findViewById(R.id.txt_skip).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
+        Intent loginIntent = new Intent(LoginActivity.this, DashboardActivity.class);
+        startActivity(loginIntent);
+        finish();
     }
 
     @Override
-    public void onResponse(JSONObject obj) {
+    public void trackEvent() {
+
+        super.trackApp("Login Activity","");
+    }
+
+
+
+    @Override
+    public void onJsonResponse(JSONObject obj) {
 
     }
 

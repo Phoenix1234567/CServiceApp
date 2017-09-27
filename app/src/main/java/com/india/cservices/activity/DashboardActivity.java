@@ -93,6 +93,12 @@ public class DashboardActivity extends BaseActivity implements OnItemCLickListne
     }
 
     @Override
+    public void trackEvent() {
+        super.trackApp("dashboard","");
+    }
+
+
+    @Override
     public void OnItemCLick(int pos) {
         mDrawer.closeDrawer(GravityCompat.START);
     }

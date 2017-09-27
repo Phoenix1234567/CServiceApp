@@ -12,11 +12,11 @@ import com.india.cservices.net.VolleyHelper;
 public class CSApplication extends MultiDexApplication {
 
     CSApplication csInstance ;
-
     @Override
     public void onCreate() {
         super.onCreate();
         csInstance = this ;
         VolleyHelper.init(this);
     }
+
 }
