@@ -19,7 +19,6 @@ public class SplashActivity extends BaseActivity {
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.splas_activity);
         loadSplash();
-
     }
 
     private void loadSplash() {
@@ -27,18 +26,11 @@ public class SplashActivity extends BaseActivity {
         handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    //   fetchUserDefaultsDetail();
                                     loginFailed();
                                 }
                             }
 
                 , 1000);
-    }
-
-    void success(){
-      //  Intent loginIntent = new Intent(SplashActivity.this, MIDirectLoginActivity.class);
-      //  startActivity(loginIntent);
-      //  finish();
     }
 
     void loginFailed(){
