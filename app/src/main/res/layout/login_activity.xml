@@ -80,6 +80,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
         <TextView
+            android:id="@+id/txt_forgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
@@ -87,31 +88,49 @@
             android:layout_marginRight="5dp"
             android:layout_alignParentRight="true"
             android:text="Forgate password"/>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@+id/txt_forgot"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="30dp"
+
+            android:layout_centerHorizontal="true"
+            android:text="Login"/>
     </RelativeLayout>
     </LinearLayout>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_above="@+id/txt_skip"
+    android:layout_marginBottom="20dp"
+    android:layout_centerHorizontal="true"
+    android:gravity="center_horizontal"
+    >
     <TextView
         android:id="@+id/txt_logi"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="10sp"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:textColor="@color/colorWhite"
-        android:layout_above="@+id/txt_login"
-android:layout_marginBottom="50dp"
-        android:layout_centerHorizontal="true"
-        android:text="dont have any account? singhUp"/>
-    <Button
-        android:id="@+id/txt_login"
-        android:layout_width="match_parent"
+
+        android:text="dont have any account? "/>
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:textColor="@color/colorWhite"
-        android:layout_above="@+id/txt_skip"
-        android:background="@color/colorPrimary"
-        android:layout_margin="10dp"
-       android:layout_centerHorizontal="true"
-        android:text="Login"/>
+        android:textColor="@android:color/holo_red_dark"
+        android:text=" singhUp"/>
+</LinearLayout>
     <TextView
         android:id="@+id/txt_skip"
         android:layout_width="match_parent"
