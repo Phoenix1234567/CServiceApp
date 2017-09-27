@@ -2,10 +2,22 @@ package com.india.cservices.net;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.india.cservices.inerfaces.INetworkResponse;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class VolleyHelper {
@@ -45,7 +57,64 @@ public class VolleyHelper {
         } else {
             throw new IllegalStateException("ImageLoader not initialized");
         }
-    }	
+    }
+
+
+
+    public static void jsonNetworkRequest(String url, boolean isPost, JSONObject jsonObject, final INetworkResponse listener)
+    {
+
+
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("onresponse", " : " + response.toString());
+              listener.onJsonResponse(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", " : "+error.getMessage());
+                listener.onError(error.getMessage());
+            }
+        });
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                9000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        mRequestQueue.add(stringRequest);
+    }
+
+     public static void stringNetworkRequest(String url, final INetworkResponse listener) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("onresponse", " : " + response.toString());
+                        JSONObject jsonObject = null;
+                        try {
+                    listener.onJsonResponse( new JSONObject(response));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error", " : "+error.getMessage());
+                        listener.onError(error.getMessage());
+                    }
+                }) {
+
+        };
+
+        mRequestQueue.add(stringRequest);
+    }
 	
 	
 	
