@@ -13,4 +13,8 @@ public class AppConstants {
     public static final String EMAIL = "email";
     public static final String PHONE = "phone";
     public static final String MAIL = "mail";
+
+    public static enum networkRequestType {
+        LOGIN, SIGNUP
+    }
 }

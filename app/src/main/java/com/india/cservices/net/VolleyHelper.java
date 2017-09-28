@@ -14,6 +14,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.india.cservices.common.AppConstants;
 import com.india.cservices.inerfaces.INetworkResponse;
 
 import org.json.JSONException;
@@ -61,7 +62,7 @@ public class VolleyHelper {
 
 
 
-    public static void jsonNetworkRequest(String url, boolean isPost, JSONObject jsonObject, final INetworkResponse listener)
+    public static void jsonNetworkRequest(String url, boolean isPost, JSONObject jsonObject, final INetworkResponse listener, final AppConstants.networkRequestType networkRequestType)
     {
 
 
@@ -70,14 +71,14 @@ public class VolleyHelper {
             @Override
             public void onResponse(JSONObject response) {
                 Log.e("onresponse", " : " + response.toString());
-              listener.onJsonResponse(response);
+              listener.onJsonResponse(response,networkRequestType);
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("error", " : "+error.getMessage());
-                listener.onError(error.getMessage());
+                listener.onError(error.getMessage(),networkRequestType);
             }
         });
 
@@ -89,7 +90,7 @@ public class VolleyHelper {
         mRequestQueue.add(stringRequest);
     }
 
-     public static void stringNetworkRequest(String url, final INetworkResponse listener) {
+     public static void stringNetworkRequest(String url, final INetworkResponse listener, final AppConstants.networkRequestType networkRequestType) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -97,7 +98,7 @@ public class VolleyHelper {
                         Log.e("onresponse", " : " + response.toString());
                         JSONObject jsonObject = null;
                         try {
-                    listener.onJsonResponse( new JSONObject(response));
+                    listener.onJsonResponse( new JSONObject(response),networkRequestType);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -107,7 +108,7 @@ public class VolleyHelper {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("error", " : "+error.getMessage());
-                        listener.onError(error.getMessage());
+                        listener.onError(error.getMessage(),networkRequestType);
                     }
                 }) {
 
