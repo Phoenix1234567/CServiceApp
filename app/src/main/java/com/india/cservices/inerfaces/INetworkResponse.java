@@ -1,5 +1,6 @@
 package com.india.cservices.inerfaces;
 
+import com.india.cservices.common.ApiConstants;
 import com.india.cservices.common.AppConstants;
 
 import org.json.JSONObject;
@@ -10,7 +11,7 @@ import org.json.JSONObject;
 
 public interface INetworkResponse {
 
-    void onJsonResponse(JSONObject obj, AppConstants.networkRequestType networkRequestType);
-    void onError(String error, AppConstants.networkRequestType networkRequestType);
+    void onJsonResponse(JSONObject obj, ApiConstants.networkRequestType networkRequestType);
+    void onError(String error, ApiConstants.networkRequestType networkRequestType);
   //  void onStringResponse(String response);
 }

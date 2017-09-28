@@ -14,6 +14,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.india.cservices.common.ApiConstants;
 import com.india.cservices.common.AppConstants;
 import com.india.cservices.inerfaces.INetworkResponse;
 
@@ -62,7 +63,7 @@ public class VolleyHelper {
 
 
 
-    public static void jsonNetworkRequest(String url, boolean isPost, JSONObject jsonObject, final INetworkResponse listener, final AppConstants.networkRequestType networkRequestType)
+    public static void jsonNetworkRequest(String url, boolean isPost, JSONObject jsonObject, final INetworkResponse listener, final ApiConstants.networkRequestType networkRequestType)
     {
 
 
@@ -90,7 +91,7 @@ public class VolleyHelper {
         mRequestQueue.add(stringRequest);
     }
 
-     public static void stringNetworkRequest(String url, final INetworkResponse listener, final AppConstants.networkRequestType networkRequestType) {
+     public static void stringNetworkRequest(String url, final INetworkResponse listener, final ApiConstants.networkRequestType networkRequestType) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

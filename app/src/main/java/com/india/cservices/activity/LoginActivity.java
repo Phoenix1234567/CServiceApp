@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.india.cservices.R;
+import com.india.cservices.common.ApiConstants;
 import com.india.cservices.common.AppConstants;
 import com.india.cservices.inerfaces.INetworkResponse;
 import com.india.cservices.net.VolleyHelper;
@@ -40,7 +41,7 @@ public class LoginActivity extends BaseActivity implements INetworkResponse {
         switch (v.getId()) {
             case R.id.btn_login:
 
-                VolleyHelper.jsonNetworkRequest("http://172.18.120.127:8112/user/login", true, createParamsForLogin(), this, AppConstants.networkRequestType.LOGIN);
+                VolleyHelper.jsonNetworkRequest("http://172.18.120.127:8112/user/login", true, createParamsForLogin(), this, ApiConstants.networkRequestType.LOGIN);
                 break;
             default:
 
@@ -72,7 +73,7 @@ public class LoginActivity extends BaseActivity implements INetworkResponse {
 
 
     @Override
-    public void onJsonResponse(JSONObject obj, AppConstants.networkRequestType networkRequestType) {
+    public void onJsonResponse(JSONObject obj, ApiConstants.networkRequestType networkRequestType) {
         switch (networkRequestType) {
             case LOGIN:
                 Toast.makeText(this, "Successfull login", Toast.LENGTH_LONG).show();
@@ -85,7 +86,7 @@ public class LoginActivity extends BaseActivity implements INetworkResponse {
     }
 
     @Override
-    public void onError(String error, AppConstants.networkRequestType networkRequestType) {
+    public void onError(String error, ApiConstants.networkRequestType networkRequestType) {
         switch (networkRequestType) {
             case LOGIN:
                 Toast.makeText(this, "Please enter valid username and password", Toast.LENGTH_LONG).show();
