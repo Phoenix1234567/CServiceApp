@@ -5,10 +5,12 @@ import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
@@ -18,6 +20,8 @@ import com.india.cservices.inerfaces.INetworkResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 
 public class VolleyHelper {
@@ -61,8 +65,7 @@ public class VolleyHelper {
 
 
 
-    public static void jsonNetworkRequest(String url, boolean isPost, JSONObject jsonObject, final INetworkResponse listener, final ApiConstants.networkRequestType networkRequestType)
-    {
+    public static void jsonNetworkRequest(String url, boolean isPost, JSONObject jsonObject, final INetworkResponse listener, final ApiConstants.networkRequestType networkRequestType) {
 
 
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
@@ -76,10 +79,48 @@ public class VolleyHelper {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("error", " : "+error.getMessage());
-                listener.onError(error.getMessage(),networkRequestType);
+
+                NetworkResponse networkResponse = error.networkResponse;
+                if (networkResponse != null && networkResponse.data != null) {
+                    try {
+                        String jsonError = new String(networkResponse.data,
+                                HttpHeaderParser.parseCharset(networkResponse.headers, "UTF-8"));
+                        Log.e("onErrorResponse",""+jsonError);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    // Print Error!
+                }
+                Log.e("errorMessage", " : " + error.getMessage());
+                listener.onError(error.getMessage(), networkRequestType);
             }
-        });
+        }) {
+
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> headers = new HashMap<>();
+//
+//                headers.put("Content-Type", "application/json");
+//                headers.put("Authorization", auth);
+//                return headers;
+//            }
+
+            @Override
+            protected VolleyError parseNetworkError(VolleyError volleyError) {
+
+                try {
+                    String jsonString = new String(volleyError.networkResponse.data,
+                            HttpHeaderParser.parseCharset(volleyError.networkResponse.headers, PROTOCOL_CHARSET));
+                    Log.e("parseNetworkError",""+jsonString);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                return volleyError;
+            }
+
+        };
+
+        stringRequest.setShouldCache(false);
 
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
                 9000,
@@ -106,13 +147,18 @@ public class VolleyHelper {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("error", " : "+error.getMessage());
+                        Log.e("error", " : "+error.networkResponse.data.toString());
                         listener.onError(error.getMessage(),networkRequestType);
                     }
                 }) {
+
         };
 
         mRequestQueue.add(stringRequest);
     }
+	
+	
+	
+	
 
 }
