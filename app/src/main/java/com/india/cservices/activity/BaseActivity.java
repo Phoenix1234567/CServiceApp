@@ -42,7 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     }
 
     @Override
-    public void onError(String error, ApiConstants.networkRequestType networkRequestType) {
+    public void onError(JSONObject error, ApiConstants.networkRequestType networkRequestType) {
 
     }
 }

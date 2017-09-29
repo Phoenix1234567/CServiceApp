@@ -1,19 +1,13 @@
 package com.india.cservices.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.india.cservices.R;
-import com.india.cservices.common.ApiConstants;
-import com.india.cservices.common.AppConstants;
-import com.india.cservices.common.SharedPreference;
-import com.india.cservices.net.VolleyHelper;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.india.cservices.fragment.LoginFragment;
 
 /**
  * this is a login activity
@@ -29,27 +23,35 @@ public class LoginActivity extends BaseActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-        findViewById(R.id.txt_skip).setOnClickListener(this);
-        findViewById(R.id.btn_login).setOnClickListener(this);
-        mEmailOrPhone = (EditText) findViewById(R.id.login_edittext_email);
-        mPassword = (EditText) findViewById(R.id.login_edittext_pds);
+
+        setFragment(R.id.container,LoginFragment.getInstance(),"");
+
+
+    }
+
+    private void setFragment(int containerId, Fragment fragment, String tag) {
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(containerId,fragment,tag);
+        fragmentTransaction.addToBackStack(tag);
+        fragmentTransaction.commit();
     }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
 
-        switch (v.getId()) {
-            case R.id.btn_login:
-
-                VolleyHelper.jsonNetworkRequest(ApiConstants.USER_LOGIN_URL, true, createParamsForLogin(), this, ApiConstants.networkRequestType.LOGIN);
-                break;
-            default:
-
         }
+
+    @Override
+    public void trackEvent() {
+
+        super.trackApp("Login Activity", "");
     }
 
-    JSONObject createParamsForLogin() {
+//    }
+
+   /* JSONObject createParamsForLogin() {
         JSONObject obj = new JSONObject();
         try {
             if (mEmailOrPhone.getText().toString().matches("[0-9]+"))
@@ -95,11 +97,16 @@ public class LoginActivity extends BaseActivity  {
     }
 
     @Override
-    public void onError(String error, ApiConstants.networkRequestType networkRequestType) {
+    public void onError(JSONObject error, ApiConstants.networkRequestType networkRequestType) {
         switch (networkRequestType) {
             case LOGIN:
-                Toast.makeText(this, "Please enter valid username and password", Toast.LENGTH_LONG).show();
+                //new JSONObject(error);
+                try {
+                    Toast.makeText(this, ""+error.getString("errorMessage"), Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
-    }
+    }*/
 }

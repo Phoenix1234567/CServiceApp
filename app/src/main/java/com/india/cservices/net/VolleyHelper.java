@@ -85,14 +85,20 @@ public class VolleyHelper {
                     try {
                         String jsonError = new String(networkResponse.data,
                                 HttpHeaderParser.parseCharset(networkResponse.headers, "UTF-8"));
+
+                            JSONObject object = new JSONObject(jsonError);
+
+                        listener.onError(object, networkRequestType);
                         Log.e("onErrorResponse",""+jsonError);
                     } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }catch (JSONException e) {
                         e.printStackTrace();
                     }
                     // Print Error!
                 }
                 Log.e("errorMessage", " : " + error.getMessage());
-                listener.onError(error.getMessage(), networkRequestType);
+
             }
         }) {
 
@@ -148,7 +154,7 @@ public class VolleyHelper {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("error", " : "+error.networkResponse.data.toString());
-                        listener.onError(error.getMessage(),networkRequestType);
+                       // listener.onError(error.getMessage(),networkRequestType);
                     }
                 }) {
 

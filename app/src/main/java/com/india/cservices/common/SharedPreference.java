@@ -6,12 +6,13 @@ import android.content.SharedPreferences;
 import java.util.Set;
 
 /**
- * Created by rajat on 20/04/17.
+ * Created by sujeet on 20/04/17.
+ *
  */
 
 public class SharedPreference {
     private static String SHARE_PREF_NAME = AppConstants.PREF_NAME;
-    private static SharedPreference tweetSharedPreference;
+    private static SharedPreference csPreference;
     private SharedPreferences sharedPreference;
     private SharedPreferences.Editor editor;
     private Context context;
@@ -29,10 +30,10 @@ public class SharedPreference {
     }
 
     public static SharedPreference getInstance(Context context) {
-        if (tweetSharedPreference == null) {
-            tweetSharedPreference = new SharedPreference(context);
+        if (csPreference == null) {
+            csPreference = new SharedPreference(context);
         }
-        return tweetSharedPreference;
+        return csPreference;
     }
 
     /**
@@ -180,6 +181,9 @@ public class SharedPreference {
         editor.apply();
     }
 
+    /**
+     * delete all prefrences from sharedprefrence
+     */
     public void clearSharedPreferences() {
         editor.clear();
         editor.commit();

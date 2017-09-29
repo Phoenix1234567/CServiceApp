@@ -12,6 +12,6 @@ import org.json.JSONObject;
 public interface INetworkResponse {
 
     void onSuccess(JSONObject obj, ApiConstants.networkRequestType networkRequestType);
-    void onError(String error, ApiConstants.networkRequestType networkRequestType);
+    void onError(JSONObject error, ApiConstants.networkRequestType networkRequestType);
   //  void onStringResponse(String response);
 }
