@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.india.cservices.R;
+import com.india.cservices.common.AppConstants;
+import com.india.cservices.common.SharedPreference;
 
 /**
  * Created by shalini on 6/3/2017.
@@ -26,13 +28,21 @@ public class SplashActivity extends BaseActivity {
         handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    loginFailed();
+                                    if (!SharedPreference.getInstance(SplashActivity.this).getUserID(AppConstants.USER_ID).equalsIgnoreCase(""))
+                                        laodDashboardScreen();
+                                    else
+                                        loginFailed();
                                 }
                             }
 
-                , 1000);
+                , AppConstants.SPLASH_LOADING_TIME);
     }
 
+    private void laodDashboardScreen() {
+        Intent dashboardIntent = new Intent(SplashActivity.this, DashboardActivity.class);
+        startActivity(dashboardIntent);
+        finish();
+    }
     void loginFailed(){
         Intent loginIntent = new Intent(SplashActivity.this, LoginActivity.class);
         startActivity(loginIntent);

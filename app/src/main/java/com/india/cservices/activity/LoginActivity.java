@@ -9,20 +9,21 @@ import android.widget.Toast;
 import com.india.cservices.R;
 import com.india.cservices.common.ApiConstants;
 import com.india.cservices.common.AppConstants;
-import com.india.cservices.inerfaces.INetworkResponse;
+import com.india.cservices.common.SharedPreference;
 import com.india.cservices.net.VolleyHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
+ * this is a login activity
  * Created by shalini on 6/3/2017.
  */
 
-public class LoginActivity extends BaseActivity implements INetworkResponse {
+public class LoginActivity extends BaseActivity  {
 
-    private EditText emailOrPhone;
-    private EditText password;
+    private EditText mEmailOrPhone;
+    private EditText mPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,8 @@ public class LoginActivity extends BaseActivity implements INetworkResponse {
         setContentView(R.layout.login_activity);
         findViewById(R.id.txt_skip).setOnClickListener(this);
         findViewById(R.id.btn_login).setOnClickListener(this);
-        emailOrPhone = (EditText) findViewById(R.id.login_edittext_email);
-        password = (EditText) findViewById(R.id.login_edittext_pds);
+        mEmailOrPhone = (EditText) findViewById(R.id.login_edittext_email);
+        mPassword = (EditText) findViewById(R.id.login_edittext_pds);
     }
 
     @Override
@@ -41,23 +42,21 @@ public class LoginActivity extends BaseActivity implements INetworkResponse {
         switch (v.getId()) {
             case R.id.btn_login:
 
-                VolleyHelper.jsonNetworkRequest("http://172.18.120.127:8112/user/login", true, createParamsForLogin(), this, ApiConstants.networkRequestType.LOGIN);
+                VolleyHelper.jsonNetworkRequest(ApiConstants.USER_LOGIN_URL, true, createParamsForLogin(), this, ApiConstants.networkRequestType.LOGIN);
                 break;
             default:
 
         }
-
-
     }
 
     JSONObject createParamsForLogin() {
         JSONObject obj = new JSONObject();
         try {
-            if (emailOrPhone.getText().toString().matches("[0-9]+"))
-                obj.put("mobileNo", emailOrPhone.getText().toString());
+            if (mEmailOrPhone.getText().toString().matches("[0-9]+"))
+                obj.put("mobileNo", mEmailOrPhone.getText().toString());
             else
-                obj.put("emailId", emailOrPhone.getText().toString());
-            obj.put("password", password.getText().toString());
+                obj.put("emailId", mEmailOrPhone.getText().toString());
+            obj.put("password", mPassword.getText().toString());
             return obj;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -73,16 +72,26 @@ public class LoginActivity extends BaseActivity implements INetworkResponse {
 
 
     @Override
-    public void onJsonResponse(JSONObject obj, ApiConstants.networkRequestType networkRequestType) {
+    public void onSuccess(JSONObject obj, ApiConstants.networkRequestType networkRequestType) {
         switch (networkRequestType) {
             case LOGIN:
+
+                try {
+                    SharedPreference.getInstance(LoginActivity.this).saveUserName(AppConstants.USER_NAME,!obj.isNull(AppConstants.USER_NAME)?obj.getString(AppConstants.USER_NAME):"Gues User");
+                    SharedPreference.getInstance(LoginActivity.this).saveUserID(AppConstants.USER_ID,obj.getString(AppConstants.USER_ID));
+                    SharedPreference.getInstance(LoginActivity.this).saveToken(AppConstants.TOKEN,obj.getString(AppConstants.TOKEN));
+                    SharedPreference.getInstance(LoginActivity.this).saveUserEmailId(AppConstants.EMAIL_ID,obj.getString(AppConstants.EMAIL_ID));
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
                 Toast.makeText(this, "Successfull login", Toast.LENGTH_LONG).show();
                 Intent loginIntent = new Intent(LoginActivity.this, DashboardActivity.class);
                 startActivity(loginIntent);
                 finish();
                 break;
         }
-
     }
 
     @Override

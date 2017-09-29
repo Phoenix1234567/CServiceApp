@@ -56,8 +56,8 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof LIHeader) {
             LIHeader drawerViewHolder = (LIHeader) holder ;
-            drawerViewHolder.name.setText(sharedPreference.getString(AppConstants.USER_NAME));
-            drawerViewHolder.email.setText(sharedPreference.getString(AppConstants.MAIL));
+            drawerViewHolder.name.setText(sharedPreference.getUserName(AppConstants.USER_NAME));
+            drawerViewHolder.email.setText(sharedPreference.getUserEmailId(AppConstants.EMAIL_ID));
            /* byte[] decodedString = Base64.decode(sharedPreference.getString(AppConstants.LOGED_IN_USER_PROFILE_PHOTO).getBytes(), Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             if (decodedByte != null) {

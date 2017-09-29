@@ -35,6 +35,84 @@ public class SharedPreference {
         return tweetSharedPreference;
     }
 
+    /**
+     * save userId for getting response from server
+     * @param key
+     * @param value
+     */
+    public void saveUserID(String key, String value) {
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    /**
+     * get user id from sharedprefence
+     * @param key
+     * @return
+     */
+    public String getUserID(String key) {
+        return sharedPreference.getString(key, "");
+    }
+
+    /**
+     * save token in sharedprefrence. its use for app authentication on every call
+     * key is taken identification key .
+     * @param key
+     * @param token
+     */
+    public void saveToken(String key, String token) {
+        editor.putString(key, token);
+        editor.commit();
+    }
+
+    /**
+     * get app token for sharedfrefrence for service request
+     * @param key
+     * @return
+     */
+    public String getToken(String key) {
+        return sharedPreference.getString(key, "");
+    }
+
+    /**
+     * save user name for showing in app
+     * @param key
+     * @param user_name
+     */
+    public void saveUserName(String key, String user_name) {
+        editor.putString(key, user_name);
+        editor.commit();
+    }
+
+    /**
+     * get user name from sharedprefence
+     * @param key
+     * @return
+     */
+    public String getUserName(String key) {
+        return sharedPreference.getString(key, "Guest User");
+    }
+
+
+    /**
+     * save user name for showing in app
+     * @param key
+     * @param email_id
+     */
+    public void saveUserEmailId(String key, String email_id) {
+        editor.putString(key, email_id);
+        editor.commit();
+    }
+
+    /**
+     * get user email from sharedprefence
+     * @param key
+     * @return
+     */
+    public String getUserEmailId(String key) {
+        return sharedPreference.getString(key, "guest@cservice.com");
+    }
+
 
     public void setInt(String key, int value) {
         editor.putInt(key, value);

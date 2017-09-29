@@ -1,5 +1,6 @@
 package com.india.cservices.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +15,7 @@ import android.view.View;
 
 import com.india.cservices.R;
 import com.india.cservices.adapter.DrawerRecyclerAdapter;
+import com.india.cservices.common.SharedPreference;
 import com.india.cservices.inerfaces.OnItemCLickListner;
 
 public class DashboardActivity extends BaseActivity implements OnItemCLickListner {
@@ -101,5 +103,14 @@ public class DashboardActivity extends BaseActivity implements OnItemCLickListne
     @Override
     public void OnItemCLick(int pos) {
         mDrawer.closeDrawer(GravityCompat.START);
+
+        switch (pos)
+        {
+            case 9:
+                SharedPreference.getInstance(DashboardActivity.this).clearSharedPreferences();
+                startActivity(new Intent(DashboardActivity.this,LoginActivity.class));
+                finish();
+                break;
+        }
     }
 }

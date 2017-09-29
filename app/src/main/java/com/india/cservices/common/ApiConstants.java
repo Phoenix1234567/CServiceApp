@@ -9,5 +9,8 @@ public class ApiConstants {
         LOGIN, SIGNUP
     }
 
-    public static String BASE_URL = "" ;
+    // url for cService app
+    public static String BASE_URL = "http://172.18.120.127:8112/" ;
+    public static String USER_LOGIN_URL = BASE_URL+"user/login";
+
 }

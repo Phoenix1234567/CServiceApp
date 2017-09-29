@@ -2,7 +2,6 @@ package com.india.cservices.net;
 
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -15,7 +14,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.india.cservices.common.ApiConstants;
-import com.india.cservices.common.AppConstants;
 import com.india.cservices.inerfaces.INetworkResponse;
 
 import org.json.JSONException;
@@ -72,7 +70,7 @@ public class VolleyHelper {
             @Override
             public void onResponse(JSONObject response) {
                 Log.e("onresponse", " : " + response.toString());
-              listener.onJsonResponse(response,networkRequestType);
+              listener.onSuccess(response,networkRequestType);
 
             }
         }, new Response.ErrorListener() {
@@ -99,7 +97,7 @@ public class VolleyHelper {
                         Log.e("onresponse", " : " + response.toString());
                         JSONObject jsonObject = null;
                         try {
-                    listener.onJsonResponse( new JSONObject(response),networkRequestType);
+                            listener.onSuccess( new JSONObject(response),networkRequestType);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -112,14 +110,9 @@ public class VolleyHelper {
                         listener.onError(error.getMessage(),networkRequestType);
                     }
                 }) {
-
         };
 
         mRequestQueue.add(stringRequest);
     }
-	
-	
-	
-	
 
 }
