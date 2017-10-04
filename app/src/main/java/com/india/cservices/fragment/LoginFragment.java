@@ -36,9 +36,7 @@ public class LoginFragment extends CSBaseFragment {
     }
 
     public static LoginFragment getInstance() {
-
-        LoginFragment loginFragment = new LoginFragment();
-        return loginFragment;
+        return new LoginFragment();
     }
 
     @Nullable
@@ -47,6 +45,7 @@ public class LoginFragment extends CSBaseFragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         view.findViewById(R.id.txt_skip).setOnClickListener(LoginFragment.this);
         view.findViewById(R.id.btn_login).setOnClickListener(LoginFragment.this);
+        view.findViewById(R.id.txt_sign_up).setOnClickListener(LoginFragment.this);
         mEmailOrPhone = (EditText) view.findViewById(R.id.login_edittext_email);
         mPassword = (EditText) view.findViewById(R.id.login_edittext_pds);
         return view;
@@ -64,9 +63,16 @@ public class LoginFragment extends CSBaseFragment {
 
         switch (v.getId()) {
             case R.id.btn_login:
-
                 VolleyHelper.jsonNetworkRequest(ApiConstants.USER_LOGIN_URL, true, createParamsForLogin(), this, ApiConstants.networkRequestType.LOGIN);
                 break;
+            case R.id.txt_skip:
+                saveFrefrence(null);
+                break;
+
+            case R.id.txt_sign_up:
+                setFragment(R.id.container,SignUpFragment.getInstance(),"we");
+                break;
+
             default:
         }
     }
@@ -76,9 +82,10 @@ public class LoginFragment extends CSBaseFragment {
         try {
             if (mEmailOrPhone.getText().toString().matches("[0-9]+"))
                 obj.put("mobileNo", mEmailOrPhone.getText().toString());
-            else
+            else {
                 obj.put("emailId", mEmailOrPhone.getText().toString());
-            obj.put("password", mPassword.getText().toString());
+                obj.put("password", mPassword.getText().toString());
+            }
             return obj;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -97,20 +104,7 @@ public class LoginFragment extends CSBaseFragment {
     public void onSuccess(JSONObject obj, ApiConstants.networkRequestType networkRequestType) {
         switch (networkRequestType) {
             case LOGIN:
-
-                try {
-                    SharedPreference.getInstance(mActivity).saveUserName(AppConstants.USER_NAME, !obj.isNull(AppConstants.USER_NAME) ? obj.getString(AppConstants.USER_NAME) : "Gues User");
-                    SharedPreference.getInstance(mActivity).saveUserID(AppConstants.USER_ID, obj.getString(AppConstants.USER_ID));
-                    SharedPreference.getInstance(mActivity).saveToken(AppConstants.TOKEN, obj.getString(AppConstants.TOKEN));
-                    SharedPreference.getInstance(mActivity).saveUserEmailId(AppConstants.EMAIL_ID, obj.getString(AppConstants.EMAIL_ID));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                Toast.makeText(mActivity, "Successfull login", Toast.LENGTH_LONG).show();
-                Intent loginIntent = new Intent(mActivity, DashboardActivity.class);
-                startActivity(loginIntent);
-                mActivity.finish();
+                saveFrefrence(obj);
                 break;
         }
     }
@@ -120,11 +114,30 @@ public class LoginFragment extends CSBaseFragment {
         switch (networkRequestType) {
             case LOGIN:
                 try {
-                    Toast.makeText(mActivity, "" + error.getString("errorMessage"), Toast.LENGTH_LONG).show();
-                } catch (JSONException e) {
+                      Toast.makeText(mActivity, "" + error.getString("errorMessage"), Toast.LENGTH_LONG).show();
+                    } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 break;
         }
+    }
+
+    private void saveFrefrence(JSONObject obj) {
+        if (obj!=null)
+        {
+            try {
+                SharedPreference.getInstance(mActivity).saveUserName(AppConstants.USER_NAME, !obj.isNull(AppConstants.USER_NAME) ? obj.getString(AppConstants.USER_NAME) : "Gues User");
+                SharedPreference.getInstance(mActivity).saveUserID(AppConstants.USER_ID, obj.getString(AppConstants.USER_ID));
+                SharedPreference.getInstance(mActivity).saveToken(AppConstants.TOKEN, obj.getString(AppConstants.TOKEN));
+                SharedPreference.getInstance(mActivity).saveUserEmailId(AppConstants.EMAIL_ID, obj.getString(AppConstants.EMAIL_ID));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return;
+            }
+        }
+        Intent loginIntent = new Intent(mActivity, DashboardActivity.class);
+        startActivity(loginIntent);
+        mActivity.finish();
+
     }
 }

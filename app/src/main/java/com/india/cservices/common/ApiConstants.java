@@ -12,5 +12,6 @@ public class ApiConstants {
     // url for cService app
     public static String BASE_URL = "http://172.18.120.127:8112/" ;
     public static String USER_LOGIN_URL = BASE_URL+"user/login";
+    public static String USER_SIGNUP_URL = BASE_URL+"user/register";
 
 }

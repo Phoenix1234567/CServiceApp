@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-
         >
         <TextView
             android:layout_width="match_parent"
@@ -39,12 +38,12 @@
             >
 
             <EditText
-                android:id="@+id/login_edittext_first_namel"
+                android:id="@+id/editFirstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/user"
                 android:drawablePadding="10dp"
-                android:hint="UserName"
+                android:hint="First name "
 
                 />
         </android.support.design.widget.TextInputLayout>
@@ -59,12 +58,12 @@
             >
 
             <EditText
-                android:id="@+id/login_edittext_last_name"
+                android:id="@+id/editLastName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/user"
                 android:drawablePadding="10dp"
-                android:hint="Password"
+                android:hint="last name"
 
                 />
         </android.support.design.widget.TextInputLayout>
@@ -79,12 +78,12 @@
             >
 
             <EditText
-                android:id="@+id/login_edittext_email"
+                android:id="@+id/editEmailId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/user"
                 android:drawablePadding="10dp"
-                android:hint="Password"
+                android:hint="email id "
 
                 />
         </android.support.design.widget.TextInputLayout>
@@ -97,12 +96,12 @@
             >
 
             <EditText
-                android:id="@+id/login_edittext_pds"
+                android:id="@+id/editMobileNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/user"
                 android:drawablePadding="10dp"
-                android:hint="Password"
+                android:hint="mobile number"
 
                 />
         </android.support.design.widget.TextInputLayout>
@@ -115,7 +114,7 @@
             >
 
             <EditText
-                android:id="@+id/login_edittext_mobile"
+                android:id="@+id/editPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/user"
@@ -133,19 +132,19 @@
             >
 
             <EditText
-                android:id="@+id/login_edittext_refral"
+                android:id="@+id/editRefrralCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/user"
                 android:drawablePadding="10dp"
-                android:hint="Password"
+                android:hint="refrral code"
 
                 />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"

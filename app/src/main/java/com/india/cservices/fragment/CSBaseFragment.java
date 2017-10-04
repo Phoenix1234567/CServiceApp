@@ -1,6 +1,7 @@
 package com.india.cservices.fragment;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 
@@ -21,10 +22,16 @@ public abstract class CSBaseFragment extends Fragment implements INetworkRespons
     public  void setFragment()
     {
 
-
     }
 
     public abstract void trackEvent();
+
+    protected void setFragment(int containerId, Fragment fragment, String tag) {
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(containerId,fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
 
     @Override
     public void onClick(View v) {
