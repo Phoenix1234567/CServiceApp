@@ -9,9 +9,9 @@ import com.india.cservices.net.VolleyHelper;
  *
  */
 
-public class CSApplication extends MultiDexApplication {
+public class Application extends MultiDexApplication {
 
-    CSApplication csInstance ;
+    Application csInstance ;
     @Override
     public void onCreate() {
         super.onCreate();

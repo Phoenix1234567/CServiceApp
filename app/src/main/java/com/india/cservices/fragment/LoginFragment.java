@@ -25,7 +25,7 @@ import org.json.JSONObject;
  *
  */
 
-public class LoginFragment extends CSBaseFragment {
+public class LoginFragment extends BaseFragment {
 
     private EditText mEmailOrPhone;
     private EditText mPassword;
@@ -44,6 +44,7 @@ public class LoginFragment extends CSBaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         view.findViewById(R.id.txt_skip).setOnClickListener(LoginFragment.this);
+        view.findViewById(R.id.txvChangePsd).setOnClickListener(LoginFragment.this);
         view.findViewById(R.id.btn_login).setOnClickListener(LoginFragment.this);
         view.findViewById(R.id.txt_sign_up).setOnClickListener(LoginFragment.this);
         mEmailOrPhone = (EditText) view.findViewById(R.id.login_edittext_email);
@@ -71,6 +72,9 @@ public class LoginFragment extends CSBaseFragment {
 
             case R.id.txt_sign_up:
                 setFragment(R.id.container,SignUpFragment.getInstance(),"we");
+                break;
+            case R.id.txvChangePsd:
+                setFragment(R.id.container, ChangePSDFragment.getInstance(),"we");
                 break;
 
             default:

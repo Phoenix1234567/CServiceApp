@@ -16,7 +16,7 @@ import org.json.JSONObject;
  *
  */
 
-public abstract class CSBaseFragment extends Fragment implements INetworkResponse, View.OnClickListener, trackAppListner {
+public abstract class BaseFragment extends Fragment implements INetworkResponse, View.OnClickListener, trackAppListner {
 
 
     public  void setFragment()

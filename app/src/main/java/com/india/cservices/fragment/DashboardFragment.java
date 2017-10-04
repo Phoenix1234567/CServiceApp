@@ -6,7 +6,7 @@ import android.view.View;
  * Created by lab1 on 22/09/17.
  */
 
-public class CSDashboardFragment extends CSBaseFragment {
+public class DashboardFragment extends BaseFragment {
 
     @Override
     public void trackEvent() {

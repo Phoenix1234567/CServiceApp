@@ -22,7 +22,7 @@ import org.json.JSONObject;
  * Created by lab1 on 26/09/17.
  * */
 
-public class SignUpFragment extends CSBaseFragment {
+public class SignUpFragment extends BaseFragment {
 
 
     EditText mFirstName;
