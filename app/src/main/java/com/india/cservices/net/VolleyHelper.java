@@ -115,9 +115,11 @@ public class VolleyHelper {
             protected VolleyError parseNetworkError(VolleyError volleyError) {
 
                 try {
-                    String jsonString = new String(volleyError.networkResponse.data,
-                            HttpHeaderParser.parseCharset(volleyError.networkResponse.headers, PROTOCOL_CHARSET));
-                    Log.e("parseNetworkError",""+jsonString);
+                    if(volleyError.networkResponse.data!=null) {
+                        String jsonString = new String(volleyError.networkResponse.data,
+                                HttpHeaderParser.parseCharset(volleyError.networkResponse.headers, PROTOCOL_CHARSET));
+                        Log.e("parseNetworkError", "" + jsonString);
+                    }
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }

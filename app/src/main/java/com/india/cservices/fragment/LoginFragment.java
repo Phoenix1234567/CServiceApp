@@ -82,10 +82,10 @@ public class LoginFragment extends CSBaseFragment {
         try {
             if (mEmailOrPhone.getText().toString().matches("[0-9]+"))
                 obj.put("mobileNo", mEmailOrPhone.getText().toString());
-            else {
+            else
                 obj.put("emailId", mEmailOrPhone.getText().toString());
                 obj.put("password", mPassword.getText().toString());
-            }
+
             return obj;
         } catch (JSONException e) {
             e.printStackTrace();

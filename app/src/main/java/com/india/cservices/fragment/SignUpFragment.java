@@ -93,12 +93,12 @@ public class SignUpFragment extends CSBaseFragment {
             else {
                 return null ;
             }
-            if (!StringUtils.stringIsNull(mMobileNo.getText().toString()) && StringUtils.validateEmail(mEmailId.getText().toString()))
+            if (!StringUtils.stringIsNull(mMobileNo.getText().toString()) && !mEmailId.getText().toString().equalsIgnoreCase(""))
                 obj.put("mobileNo", mMobileNo.getText().toString());
             else {
                 return null ;
             }
-            if (!StringUtils.stringIsNull(mPassword.getText().toString()) && StringUtils.validateEmail(mPassword.getText().toString()))
+            if (!StringUtils.stringIsNull(mPassword.getText().toString()) && !mPassword.getText().toString().equalsIgnoreCase(""))
                 obj.put("password", mPassword.getText().toString());
             else {
                 return null ;
