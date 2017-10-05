@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.india.cservices.R;
 import com.india.cservices.common.ApiConstants;
+import com.india.cservices.inerfaces.OnUpdateTitleLister;
 import com.india.cservices.net.VolleyHelper;
 import com.india.cservices.utils.StringUtils;
 
@@ -32,14 +33,13 @@ public class SignUpFragment extends BaseFragment {
     EditText mPassword;
     EditText mRefrralCode;
 
-
-
     public SignUpFragment()
     {
 
     }
 
-    public static Fragment getInstance() {
+    public static Fragment getInstance(OnUpdateTitleLister titleLister) {
+        titleLister.onUpdateTitle("Registration",1);
         return new SignUpFragment();
     }
 
@@ -107,6 +107,7 @@ public class SignUpFragment extends BaseFragment {
             obj.put("referredCode", mRefrralCode.getText().toString());
             obj.put("userType","Customer");
             obj.put("active",true);
+
             Log.e("jsonResponse", obj.toString());
             return obj;
         } catch (JSONException e) {

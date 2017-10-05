@@ -12,9 +12,11 @@ import android.widget.Toast;
 
 import com.india.cservices.R;
 import com.india.cservices.activity.DashboardActivity;
+import com.india.cservices.activity.LoginActivity;
 import com.india.cservices.common.ApiConstants;
 import com.india.cservices.common.AppConstants;
 import com.india.cservices.common.SharedPreference;
+import com.india.cservices.inerfaces.OnUpdateTitleLister;
 import com.india.cservices.net.VolleyHelper;
 
 import org.json.JSONException;
@@ -35,8 +37,9 @@ public class LoginFragment extends BaseFragment {
 
     }
 
-    public static LoginFragment getInstance() {
-        return new LoginFragment();
+    public static LoginFragment getInstance(OnUpdateTitleLister titleLister) {
+          titleLister.onUpdateTitle("Login",0);
+         return new LoginFragment();
     }
 
     @Nullable
@@ -71,10 +74,10 @@ public class LoginFragment extends BaseFragment {
                 break;
 
             case R.id.txt_sign_up:
-                setFragment(R.id.container,SignUpFragment.getInstance(),"we");
+                setFragment(R.id.container,SignUpFragment.getInstance((LoginActivity)mActivity),"we");
                 break;
             case R.id.txvChangePsd:
-                setFragment(R.id.container, ChangePSDFragment.getInstance(),"we");
+                setFragment(R.id.container, ChangePSDFragment.getInstance((LoginActivity)mActivity),"we");
                 break;
 
             default:
@@ -99,8 +102,7 @@ public class LoginFragment extends BaseFragment {
 
     @Override
     public void trackEvent() {
-
-        super.trackApp("Login Activity", "");
+        super.trackApp("LoginFragment", "");
     }
 
 

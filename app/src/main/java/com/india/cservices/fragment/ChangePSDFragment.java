@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.india.cservices.R;
+import com.india.cservices.inerfaces.OnUpdateTitleLister;
 
 /**
  * Created by lab1 on 04/10/17.
@@ -23,7 +24,8 @@ public class ChangePSDFragment extends BaseFragment {
 
     }
 
-    public static Fragment getInstance() {
+    public static Fragment getInstance(OnUpdateTitleLister titleLister) {
+        titleLister.onUpdateTitle("Change Password",2);
         return new ChangePSDFragment();
     }
 
