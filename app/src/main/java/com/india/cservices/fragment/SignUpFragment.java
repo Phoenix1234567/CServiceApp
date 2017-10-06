@@ -1,5 +1,7 @@
 package com.india.cservices.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -32,6 +34,7 @@ public class SignUpFragment extends BaseFragment {
     EditText mMobileNo;
     EditText mPassword;
     EditText mRefrralCode;
+    Activity mActivity ;
 
     public SignUpFragment()
     {
@@ -41,6 +44,12 @@ public class SignUpFragment extends BaseFragment {
     public static Fragment getInstance(OnUpdateTitleLister titleLister) {
         titleLister.onUpdateTitle("Registration",1);
         return new SignUpFragment();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mActivity = getActivity();
     }
 
     @Nullable
@@ -93,7 +102,7 @@ public class SignUpFragment extends BaseFragment {
             else {
                 return null ;
             }
-            if (!StringUtils.stringIsNull(mMobileNo.getText().toString()) && !mEmailId.getText().toString().equalsIgnoreCase(""))
+            if (!StringUtils.stringIsNull(mMobileNo.getText().toString()))
                 obj.put("mobileNo", mMobileNo.getText().toString());
             else {
                 return null ;
@@ -108,7 +117,7 @@ public class SignUpFragment extends BaseFragment {
             obj.put("userType","Customer");
             obj.put("active",true);
 
-            Log.e("jsonResponse", obj.toString());
+            Log.e("jsonRequest", obj.toString());
             return obj;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -119,6 +128,7 @@ public class SignUpFragment extends BaseFragment {
     @Override
     public void onSuccess(JSONObject obj, ApiConstants.networkRequestType networkRequestType) {
         super.onSuccess(obj, networkRequestType);
+        saveFrefrence(obj,mActivity);
     }
 
     @Override

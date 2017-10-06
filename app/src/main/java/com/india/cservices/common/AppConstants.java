@@ -2,11 +2,10 @@ package com.india.cservices.common;
 
 /**
  * Created by shalini on 6/4/2017.
+ *
  */
 
 public class AppConstants {
-
-
 
     public static final int SPLASH_LOADING_TIME = 1000;
     public static final String PREF_NAME = "app_preference";
@@ -18,6 +17,8 @@ public class AppConstants {
     public static final String TOKEN = "token";
     public static final String PHONE = "phone";
     public static final String MAIL = "mail";
+    public static final String ERROR_MSG = "errorMessage";
+    public static final String GUEST_USER = "Guest User";
 
 
 }
